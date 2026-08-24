@@ -55,6 +55,8 @@ PLAID_SECRET=your_sandbox_secret
 
 Run the token acquisition app:
 
+NOTE: Much of this can be found in the Plaid documentation. For example https://plaid.com/docs/assets/add-to-app/ will walk you through linking a bank and the flow of access tokens
+
 ```bash
 python app.py
 ```

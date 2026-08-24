@@ -10,22 +10,13 @@ from plaid.model.country_code import CountryCode
 
 from dotenv import load_dotenv
 
+from plaid_client import client
+
 from flask import Flask, jsonify, request, render_template
 app = Flask(__name__)
 
-load_dotenv()
 access_token = None
 item_id = None
-configuration = plaid.Configuration(
-    host=plaid.Environment.Sandbox,
-    api_key={
-        'clientId': os.getenv("PLAID_CLIENT_ID"),
-        'secret' : os.getenv("PLAID_SECRET")
-    }
-)
-
-api_client = plaid.ApiClient(configuration)
-client = plaid_api.PlaidApi(api_client)
   
 @app.route("/")
 def index():
@@ -66,7 +57,6 @@ def exchange_public_token():
     # associated with the currently signed-in user
     access_token = exchange_response['access_token']
     item_id = exchange_response['item_id']
-    print(exchange_response, institution)
     log_token_locally(institution, access_token, item_id)
     return jsonify({'public_token_exchange': 'complete'})
 
