@@ -14,7 +14,11 @@
         //console.log(data) ## You can un-comment this line to see the flow of data 
         const handler = Plaid.create({
             token: data.link_token,
-            onSuccess: (public_token, metadata) => { console.log(public_token); },
+            onSuccess: (public_token, metadata) => { fetch('exchange_public_token', { 
+                method : 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ public_token: public_token })
+            }); },
             onExit: (err, metadata) => { console.log(err, metadata); }
         });
         handler.open();

@@ -61,7 +61,7 @@ def exchange_public_token():
     # These values should be saved to a persistent database and
     # associated with the currently signed-in user
     access_token = exchange_response['access_token']
-    item_id = response['item_id']
+    item_id = exchange_response['item_id']
 
     return jsonify({'public_token_exchange': 'complete'})
 
