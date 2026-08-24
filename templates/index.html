@@ -2,27 +2,23 @@
 <html>
   <body>
     <h1>Connect a bank account</h1>
+    <button id="link-button">Connect</button>
 
     <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
     <script>
-      const linkHandler = Plaid.create({
-        token: (await $.post('/create_link_token')).link_token,
-        onSuccess: (public_token, metadata) => {
-          // Send the public_token to your app server.
-          $.post('/exchange_public_token', {
-            public_token: public_token,
-          });
-        },
-        onExit: (err, metadata) => {
-          console.log(err, metadata)
-        },
-        onEvent: (eventName, metadata) => {
-          // Optionally capture Link flow events, streamed through
-          // this callback as your users connect an Item to Plaid.
-        },
+      document.getElementById('link-button').addEventListener('click', async () => {
+        const response = await fetch('create_link_token', {
+            method: 'POST'
+        });
+        const data = await response.json()
+        //console.log(data) ## You can un-comment this line to see the flow of data 
+        const handler = Plaid.create({
+            token: data.link_token,
+            onSuccess: (public_token, metadata) => { console.log(public_token); },
+            onExit: (err, metadata) => { console.log(err, metadata); }
+        });
+        handler.open();
       });
-
-      linkHandler.open();
     </script>
   </body>
 </html>
