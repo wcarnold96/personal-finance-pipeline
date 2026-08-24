@@ -28,7 +28,7 @@ def create_link_token():
     user_id = "Caleb"
     # Create a link_token for the given user
     request = LinkTokenCreateRequest(
-            products=[Products("auth")],
+            products=[Products("transactions"), Products("investments"), Products("liabilities")],
             client_name="Plaid Test App",
             country_codes=[CountryCode('US')],
             language='en',

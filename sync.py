@@ -17,12 +17,17 @@ modified = []
 removed = []
 has_more = True
 
-for institution in data:
+for item_id in data:
     while has_more:
-        request = TransactionsSyncRequest(
-                access_token=data[institution]['access_token'],
-                cursor=str(data[institution]['cursor'])
-        )
+        if data[item_id]['cursor']:
+            request = TransactionsSyncRequest(
+                    access_token=data[item_id]['access_token'],
+                    cursor=data[item_id]['cursor']
+            )
+        else:
+            request = TransactionsSyncRequest(
+                    access_token=data[item_id]['access_token']
+            )
         response = client.transactions_sync(request)
 
         added.extend(response['added'])
