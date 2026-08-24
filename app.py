@@ -1,4 +1,5 @@
 import os
+import json
 import plaid
 from plaid.api import plaid_api
 from plaid.model.item_public_token_exchange_request import ItemPublicTokenExchangeRequest
@@ -56,15 +57,31 @@ def exchange_public_token():
     exchange_request = ItemPublicTokenExchangeRequest(
             public_token = request.get_json()['public_token']
     )
+    
+    institution = request.get_json()['institution']
+
     exchange_response = client.item_public_token_exchange(exchange_request)
     
     # These values should be saved to a persistent database and
     # associated with the currently signed-in user
     access_token = exchange_response['access_token']
     item_id = exchange_response['item_id']
-
+    print(exchange_response, institution)
+    log_token_locally(institution, access_token, item_id)
     return jsonify({'public_token_exchange': 'complete'})
 
+
+def log_token_locally(institution, access_token, item_id):
+    try:
+        with open("tokens.json", "r") as f:
+            data = json.load(f)
+    except:
+        data = {}
+        
+    data[item_id] = {'institution': institution, 'access_token': access_token, 'cursor': None}
+    
+    with open("tokens.json", "w") as f:
+        json.dump(data, f, indent=2)
 
 if __name__ == "__main__":
     print(app.url_map)

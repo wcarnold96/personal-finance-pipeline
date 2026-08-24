@@ -17,7 +17,8 @@
             onSuccess: (public_token, metadata) => { fetch('exchange_public_token', { 
                 method : 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ public_token: public_token })
+                body: JSON.stringify({ public_token: public_token,
+                                       institution: metadata.institution.name})
             }); },
             onExit: (err, metadata) => { console.log(err, metadata); }
         });
