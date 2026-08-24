@@ -9,7 +9,7 @@ from plaid.model.country_code import CountryCode
 
 from dotenv import load_dotenv
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 app = Flask(__name__)
 
 load_dotenv()
@@ -26,7 +26,9 @@ configuration = plaid.Configuration(
 api_client = plaid.ApiClient(configuration)
 client = plaid_api.PlaidApi(api_client)
   
-
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 @app.route("/create_link_token", methods=['POST'])
 def create_link_token():
@@ -65,4 +67,5 @@ def exchange_public_token():
 
 
 if __name__ == "__main__":
+    print(app.url_map)
     app.run(debug=True, port=5000)
