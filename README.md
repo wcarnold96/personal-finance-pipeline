@@ -30,8 +30,8 @@ Infrastructure defined in Terraform. CI/CD via GitHub Actions.
 ## Current state
 
 - [x] Plaid Link integration — link token creation and public token exchange
-- [ ] Transaction sync via `/transactions/sync` with cursor-based incremental loads
-- [ ] S3 landing zone with date partitioning
+- [x] Transaction sync via `/transactions/sync` with cursor-based incremental loads
+- [x] S3 landing zone with date partitioning
 - [ ] Parquet conversion
 - [ ] Glue catalog and Athena tables
 - [ ] dbt staging models and marts
