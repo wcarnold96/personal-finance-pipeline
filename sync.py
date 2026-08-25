@@ -15,9 +15,9 @@ except:
 added = []
 modified = []
 removed = []
-has_more = True
 
 for item_id in data:
+    has_more = True
     while has_more:
         if data[item_id]['cursor']:
             request = TransactionsSyncRequest(
@@ -37,6 +37,6 @@ for item_id in data:
         has_more = response['has_more']
 
         cursor = response['next_cursor']
-
-        print(response)
-
+        data[item_id]['cursor'] = cursor
+with open("tokens.json", "w") as f:
+    json.dump(data, f, indent=2)
