@@ -33,7 +33,7 @@ Infrastructure defined in Terraform. CI/CD via GitHub Actions.
 - [x] Transaction sync via `/transactions/sync` with cursor-based incremental loads
 - [x] S3 landing zone with date partitioning
 - [ ] Parquet conversion
-- [ ] Glue catalog and Athena tables
+- [x] Glue catalog and Athena tables
 - [ ] dbt staging models and marts
 - [ ] Terraform infrastructure
 - [ ] Scheduled Lambda ingestion
