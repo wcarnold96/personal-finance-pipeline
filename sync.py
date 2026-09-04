@@ -17,6 +17,8 @@ except:
 s3 = boto3.client('s3')
 today = datetime.now().date()
 ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+bucket=os.getenv("S3_BUCKET")
+
 for item_id in data:
     lines = []
     has_more = True
@@ -42,7 +44,7 @@ for item_id in data:
         cursor = response['next_cursor']
         data[item_id]['cursor'] = cursor
 
-    s3.put_object(Bucket=os.getenv("S3_BUCKET"), Key=f"raw/transactions/env={env}/sync_date={today}/transactions-{item_id}-{ts}.jsonl", Body="\n".join(lines)) 
+    s3.put_object(Bucket=bucket, Key=f"raw/transactions/env={env}/sync_date={today}/transactions-{item_id}-{ts}.jsonl", Body="\n".join(lines)) 
 with open("tokens.json", "w") as f:
     json.dump(data, f, indent=2)
 
