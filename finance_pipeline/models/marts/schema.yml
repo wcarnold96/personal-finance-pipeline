@@ -1,0 +1,13 @@
+models:
+  - name: fct_daily_cash_flow
+    columns:
+      - name: date
+        tests:
+          - unique
+          - not_null
+      - name: cash_outflow
+        description: Total money leaving accounts
+      - name: cash_inflow
+        description: Total money entering accounts
+      - name: net_cashflow
+        description: Sum of cash_outflow (treated as negative) and cash_inflow (treated as positive)

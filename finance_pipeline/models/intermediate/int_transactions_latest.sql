@@ -20,4 +20,4 @@ select
   sync_timestamp
 from latest
 where rn = 1
-and change_type != 'removed';
+and change_type != 'removed'
