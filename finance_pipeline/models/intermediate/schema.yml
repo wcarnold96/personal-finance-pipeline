@@ -1,0 +1,7 @@
+models:
+  - name: int_transactions_latest
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
