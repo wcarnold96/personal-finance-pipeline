@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 
 from plaid.model.transactions_sync_request import TransactionsSyncRequest
 
-from plaid_client import client
+from plaid_client import client, env
 
 try:
     with open("tokens.json", "r") as f:
@@ -42,7 +42,7 @@ for item_id in data:
         cursor = response['next_cursor']
         data[item_id]['cursor'] = cursor
 
-    s3.put_object(Bucket=os.getenv("S3_BUCKET"), Key=f"raw/transactions/sync_date={today}/transactions-{item_id}-{ts}.jsonl", Body="\n".join(lines)) 
+    s3.put_object(Bucket=os.getenv("S3_BUCKET"), Key=f"raw/transactions/env={env}/sync_date={today}/transactions-{item_id}-{ts}.jsonl", Body="\n".join(lines)) 
 with open("tokens.json", "w") as f:
     json.dump(data, f, indent=2)
 

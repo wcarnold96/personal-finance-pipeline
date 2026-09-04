@@ -3,3 +3,4 @@ sources:
     schema: finance
     tables:
       - name: transactions_raw
+        identifier: "{{ 'transactions_raw_sandbox' if target.name == 'dev' else 'transactions_raw_prod' }}"
