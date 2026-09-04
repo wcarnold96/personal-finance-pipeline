@@ -2,7 +2,7 @@ import os
 import plaid
 import json
 import boto3
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 from plaid.model.transactions_sync_request import TransactionsSyncRequest
 
@@ -15,7 +15,7 @@ except:
     print("Unable to load access_tokens")
 
 s3 = boto3.client('s3')
-today = datetime.now().date()
+today = datetime.now(UTC).date()
 ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 bucket=os.getenv("S3_BUCKET")
 
