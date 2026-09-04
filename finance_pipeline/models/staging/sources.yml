@@ -1,0 +1,5 @@
+sources:
+  - name: finance
+    schema: finance
+    tables:
+      - name: transactions_raw

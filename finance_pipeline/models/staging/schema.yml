@@ -1,0 +1,6 @@
+models:
+  - name: stg_transactions
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
