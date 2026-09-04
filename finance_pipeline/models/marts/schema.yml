@@ -11,3 +11,10 @@ models:
         description: Total money entering accounts
       - name: net_cashflow
         description: Sum of cash_outflow (treated as negative) and cash_inflow (treated as positive)
+  - name: fct_monthly_spending_by_category
+    columns:
+      - name: finance_category
+        tests:
+          - not_null
+        description: INCOME, TRANSFER_IN and TRANSFER_OUT categories are excluded
+

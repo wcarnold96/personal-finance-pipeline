@@ -9,6 +9,8 @@ select
   transaction.pending as pending,
   transaction.pending_transaction_id as pending_transaction_id,
   transaction.payment_channel as payment_channel,
+  transaction.personal_finance_category.primary as personal_finance_category,
+  transaction.personal_finance_category.confidence_level as confidence_level,
   item_id as item_id,
   institution as institution,
   change_type as change_type,

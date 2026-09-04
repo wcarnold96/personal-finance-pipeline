@@ -14,6 +14,8 @@ select
   pending,
   pending_transaction_id,
   payment_channel,
+  personal_finance_category,
+  confidence_level,
   item_id,
   institution,
   change_type,

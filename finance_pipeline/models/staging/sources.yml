@@ -4,3 +4,5 @@ sources:
     tables:
       - name: transactions_raw
         identifier: "{{ 'transactions_raw_sandbox' if target.name == 'dev' else 'transactions_raw_prod' }}"
+      - name: accounts_raw
+        identifier: "{{ 'accounts_raw_sandbox' if target.name == 'dev' else 'accounts_raw_prod' }}"

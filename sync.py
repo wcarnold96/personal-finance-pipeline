@@ -5,6 +5,7 @@ import boto3
 from datetime import datetime, timezone, UTC
 
 from plaid.model.transactions_sync_request import TransactionsSyncRequest
+from plaid.model.accounts_get_request import AccountsGetRequest
 
 from plaid_client import client, env
 
@@ -45,6 +46,18 @@ for item_id in data:
         data[item_id]['cursor'] = cursor
 
     s3.put_object(Bucket=bucket, Key=f"raw/transactions/env={env}/sync_date={today}/transactions-{item_id}-{ts}.jsonl", Body="\n".join(lines)) 
+
+    account_lines = []
+    accounts_request = AccountsGetRequest(
+            access_token=data[item_id]['access_token']
+    )
+    response = client.accounts_get(accounts_request)
+    institution_id = response['item']['institution_id']
+    for account in response['accounts']:
+        record = {'item_id': item_id, 'sync_timestamp': ts, 'institution': data[item_id]['institution'], 'institution_id': institution_id, 'account': account.to_dict()}
+        account_lines.append(json.dumps(record, default=str))
+    s3.put_object(Bucket=bucket, Key=f"raw/accounts/env={env}/sync_date={today}/accounts-{item_id}-{ts}.jsonl", Body="\n".join(account_lines))
+
 with open("tokens.json", "w") as f:
     json.dump(data, f, indent=2)
 
