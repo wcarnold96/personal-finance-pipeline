@@ -229,3 +229,7 @@ __marimo__/
 *.tfvars
 .terraform/
 *.tfstate*
+
+# Lambda
+package/
+lambda.zip
