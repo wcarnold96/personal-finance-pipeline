@@ -1,0 +1,19 @@
+finance_pipeline:
+  outputs:
+    dev:
+      database: awsdatacatalog
+      region_name: us-east-2
+      s3_data_dir: s3://wcarnold-finance-lake/dbt/sandbox/
+      s3_staging_dir: s3://wcarnold-finance-lake/athena-results/
+      schema: finance_dbt_sandbox
+      threads: 4
+      type: athena
+    prod:
+      database: awsdatacatalog
+      region_name: us-east-2
+      s3_data_dir: s3://wcarnold-finance-lake/dbt/prod/
+      s3_staging_dir: s3://wcarnold-finance-lake/athena-results/
+      schema: finance_dbt_prod
+      threads: 4
+      type: athena
+  target: dev
