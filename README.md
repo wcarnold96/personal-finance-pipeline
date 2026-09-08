@@ -17,21 +17,23 @@ it into marts for tracking net worth, cash flow, and savings rate over time.
 
 ## Architecture
 
-Plaid API
-/transactions/sync (cursor-based) /accounts/get (snapshot)
-↓ ↓
-sync.py ──► S3 raw layer (JSONL, partitioned by env and sync_date)
-↓
-AWS Glue Data Catalog (partition projection)
-↓
-Amazon Athena
-↓
-dbt: stg_transactions → int_transactions_latest → fct_daily_cash_flow
-→ fct_monthly_spending_by_category
-stg_accounts → dim_accounts
-↓
-Metabase
 
+```
+Plaid API
+  /transactions/sync (cursor-based)      /accounts/get (snapshot)
+        ↓                                       ↓
+    sync.py  ──►  S3 raw layer (JSONL, partitioned by env and sync_date)
+                        ↓
+              AWS Glue Data Catalog (partition projection)
+                        ↓
+                 Amazon Athena
+                        ↓
+    dbt:  stg_transactions → int_transactions_latest → fct_daily_cash_flow
+                                                    → fct_monthly_spending_by_category
+          stg_accounts     → dim_accounts
+                        ↓
+                    Metabase
+```
 
 ## Design notes
 
