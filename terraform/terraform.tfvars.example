@@ -1,0 +1,14 @@
+# Copy to terraform.tfvars and fill in your own values.
+# terraform.tfvars is gitignored.
+
+# Globally unique S3 bucket name for the data lake
+bucket_name = "your-finance-lake-bucket"
+
+# AWS region — must match where your Athena and Glue resources live
+aws_region = "us-east-2"
+
+# Tags applied to managed resources
+tags = {
+  Project   = "personal-finance-pipeline"
+  ManagedBy = "terraform"
+}

@@ -77,7 +77,7 @@ for auditability.
 - [x] dbt schema tests and singular tests, including an emptiness guard
 - [x] Metabase dashboard over the mart layer
 - [ ] Additional marts — monthly summary, merchant spending, daily balance, net worth
-- [ ] GitHub Actions CI running `dbt build`
+- [x] GitHub Actions CI running `dbt build`
 - [ ] Terraform infrastructure
 - [ ] Scheduled Lambda ingestion with tokens in SSM Parameter Store
 - [ ] Hosted Metabase instance
